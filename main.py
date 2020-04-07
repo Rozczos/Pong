@@ -38,7 +38,6 @@ while True:
     move_player.move()
     move_opponent.move()
     
-
     #Visuals
     screen.fill(bg_color)
     pygame.draw.rect(screen, light_grey, player)
