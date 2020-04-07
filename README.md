@@ -1,7 +1,5 @@
 # Pong
-Pong game | Python &amp; PyGame
-
-Simple Pong game with very basic enemy AI
+Simple Pong game with very basic enemy AI made with Python and PyGame
 
 Requirements:
 - Python 3
