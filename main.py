@@ -2,6 +2,7 @@
 import pygame, sys
 from objects import *
 from movement import *
+from scoring import *
 
 # General setup
 pygame.init()
@@ -23,6 +24,7 @@ ball = Ball(screen, screen_width, screen_height).draw()
 move_ball = Ball_move(screen, screen_width, screen_height, ball, player, opponent)
 move_player = Player_move(screen, screen_width, screen_height, player)
 move_opponent = Opponent_move(screen, screen_width, screen_height, opponent, ball)
+text = Scoring(screen, screen_width, screen_height, ball, move_ball.points_opponent, move_ball.points_player)
 
 while True:
     #Handling input
@@ -30,11 +32,12 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-            
+
     # Moving objects
     move_ball.move()
     move_player.move()
     move_opponent.move()
+    
 
     #Visuals
     screen.fill(bg_color)
@@ -42,7 +45,8 @@ while True:
     pygame.draw.rect(screen, light_grey, opponent)
     pygame.draw.ellipse(screen, light_grey, ball)
     pygame.draw.aaline(screen, light_grey, (screen_width/2, 0), (screen_width/2, screen_height))
+    Scoring(screen, screen_width, screen_height, ball, move_ball.points_opponent, move_ball.points_player).print_score()
 
-	# Updating the window 
+    # Updating the window 
     pygame.display.flip()
     clock.tick(60)

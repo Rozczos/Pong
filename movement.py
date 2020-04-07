@@ -16,17 +16,27 @@ class Ball_move(Move):
         self.ball_yspeed = 5
         self.player = player
         self.opponent = opponent
+        self.points_player = 0
+        self.points_opponent = 0
         
     def move(self):
         # Starting velocity
         self.ball.x += self.ball_xspeed
         self.ball.y += self.ball_yspeed
-
+        
         # Border collision rules
         if self.ball.top <= 0 or self.ball.bottom >= self.screen_height:
             self.ball_yspeed *= -1
-        if self.ball.left <= 0 or self.ball.right >= self.screen_width:
+
+        if self.ball.left <= 0:
+            self.points_player += 1
             self.ball_restart()
+            return self.points_player
+
+        if self.ball.right >= self.screen_width:
+            self.points_opponent += 1
+            self.ball_restart()
+            return self.points_opponent
 
         # Paddle collision rules
         if self.ball.colliderect(self.player) or self.ball.colliderect(self.opponent):
